@@ -17,6 +17,8 @@ import retrofit2.http.Query;
 
 public interface BankInterface {
 
+    //Checking
+
     @GET("mybank/authenticate_client?client_id=krisnavneet.nk@gmail.com&password=U0HH66J9")
     Call<List<AuthModel>> getToken();
 
