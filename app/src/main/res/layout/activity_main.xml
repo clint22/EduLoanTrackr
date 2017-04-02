@@ -23,15 +23,27 @@
             android:layout_centerHorizontal="true"/>
 
         <TextView
+            android:id="@+id/txteduloantrackr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="EDULOANTRACKR_"
+            android:text="EDULOANTRACKR"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#FAFAFA"
             android:layout_below="@+id/img_dollar_symbol"/>
+        <TextView
+            android:id="@+id/trackr"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FAFAFA"
+            android:layout_toRightOf="@+id/txteduloantrackr"
+            android:layout_below="@+id/img_dollar_symbol"
+            android:layout_marginTop="20dp"
+            android:text="_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <ImageView
             android:id="@+id/img_usr"
