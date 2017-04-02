@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView,display,getAccount,account,balbt,baltxt,refresh,getLoan,loanTxt;
     private EditText email;
     private String URL="https://corporateapiprojectwar.mybluemix.net/corporate_banking/";
+    private String outAmt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,12 @@ public class MainActivity extends AppCompatActivity {
         email=(EditText)findViewById(R.id.email);
         final LineChart chart = (LineChart) findViewById(R.id.chart);
        email.setVisibility(View.GONE);
-        String outAmt=PreferencesHelper.getInstance(MainActivity.this).getUnencryptedSetting(Constants.OUT_AMT_KEY);
+        if (PreferencesHelper.getInstance(MainActivity.this).getUnencryptedSetting(Constants.OUT_AMT_KEY)!=null) {
+
+            outAmt = PreferencesHelper.getInstance(MainActivity.this).getUnencryptedSetting(Constants.OUT_AMT_KEY);
+        }else {
+            outAmt ="100000";
+        }
         float amt=Float.valueOf(outAmt);
         final float frac=amt/12;
         List<Entry> entries = new ArrayList<Entry>();
