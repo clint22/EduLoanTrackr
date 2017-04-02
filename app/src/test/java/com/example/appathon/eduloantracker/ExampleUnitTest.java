@@ -1,4 +1,4 @@
-package com.example.viji.eduloantracker;
+package com.example.appathon.eduloantracker;
 
 import org.junit.Test;
 

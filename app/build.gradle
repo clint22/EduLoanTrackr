@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.example.viji.eduloantracker"
+        applicationId "com.example.appathon.eduloantracker"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
@@ -28,4 +28,11 @@ dependencies {
     compile "com.android.support:support-v4:25.1.0"
     compile "com.android.support:design:25.1.0"
     testCompile 'junit:junit:4.12'
+
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+
+    compile 'com.android.support:support-v4:25.1.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.2'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 }

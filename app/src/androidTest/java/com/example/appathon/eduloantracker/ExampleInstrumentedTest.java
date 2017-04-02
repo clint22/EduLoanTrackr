@@ -1,4 +1,4 @@
-package com.example.viji.eduloantracker;
+package com.example.appathon.eduloantracker;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
