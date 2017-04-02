@@ -25,11 +25,11 @@ public interface BankInterface {
     @GET("participantmapping?client_id=krisnavneet.nk@gmail.com")
     Call<List<AccountsModel>> getAccount();
 
- /*   @GET("balanceenquiry?client_id=krisnavneet.nk@gmail.com&token={tokenNo}&accountno={accNo}")
-    Call<List<AccountBalance>> getMyAcc(@Path("tokenNo") String token, @Path("accNo") String accno);
-    */
- @GET("balanceenquiry?client_id=krisnavneet.nk@gmail.com")
- Call<List<AccountBalance>> getMyAcc(@Query("token") String token, @Query("accountno") String accno);
+    /*   @GET("balanceenquiry?client_id=krisnavneet.nk@gmail.com&token={tokenNo}&accountno={accNo}")
+       Call<List<AccountBalance>> getMyAcc(@Path("tokenNo") String token, @Path("accNo") String accno);
+       */
+    @GET("balanceenquiry?client_id=krisnavneet.nk@gmail.com")
+    Call<List<AccountBalance>> getMyAcc(@Query("token") String token, @Query("accountno") String accno);
 
     @GET("getLoanDetails?clientId=krisnavneet.nk@gmail.com")
     Call<List<LoanModel>> getLoanDetails(@Query("param") String param, @Query("authToken") String token);
