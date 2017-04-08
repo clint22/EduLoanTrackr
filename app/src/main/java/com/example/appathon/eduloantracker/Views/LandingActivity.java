@@ -1,7 +1,7 @@
 package com.example.appathon.eduloantracker.Views;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,17 +9,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.appathon.eduloantracker.Constants;
 import com.example.appathon.eduloantracker.PreferencesHelper;
 import com.example.appathon.eduloantracker.R;
+import com.example.appathon.eduloantracker.SharedPref;
 import com.example.appathon.eduloantracker.UriList;
 import com.example.appathon.eduloantracker.UserSessionManager;
 import com.example.appathon.eduloantracker.model.AccountBalance;
 import com.example.appathon.eduloantracker.model.AccountsModel;
 import com.example.appathon.eduloantracker.model.AuthModel;
-import com.example.appathon.eduloantracker.model.LoanModel;
 import com.example.appathon.eduloantracker.service.BankInterface;
 
 import java.util.List;
@@ -40,9 +41,12 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     TextView txt_balance;
     @BindView(R.id.buttonLogin)
     Button btn_login;
+    @BindView(R.id.txt_successful)
+    TextView txt_successful;
+    @BindView(R.id.rel_sync_loans)
+    RelativeLayout rel_sync_loans;
 
-    private int progressStatus = 0;
-    private Handler handler = new Handler();
+    private Boolean loanAddedOrNot = true;
     UserSessionManager session;
 
 
@@ -55,6 +59,15 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         session = new UserSessionManager(getApplicationContext());
         if (session.checkLogin())
             finish();
+
+        if (SharedPref.getLoanAddedOrNot(LandingActivity.this)) {
+
+            txt_successful.setVisibility(View.VISIBLE);
+        } else {
+
+            rel_sync_loans.setVisibility(View.VISIBLE);
+
+        }
 
 
         loadJSON();
@@ -198,12 +211,38 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         switch (v.getId()) {
 
             case R.id.buttonLogin:
-                getLoanDetails();
+                Intent intent = new Intent(LandingActivity.this, LoanDetailActivity.class);
+                startActivityForResult(intent, Constants.LOAN_VERIFY);
                 break;
         }
     }
 
-    private void getLoanDetails() {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+
+            if (resultCode != RESULT_OK) return;
+            switch (requestCode) {
+
+                case Constants.LOAN_VERIFY:
+                    if (data == null || data.getExtras() == null) return;
+                    if (data.getExtras().containsKey("out_amount")) {
+
+                        showToast("Contains Key");
+                        Log.e("keyvalue", data.getExtras().getString("out_amount"));
+                        SharedPref.setLoanAddedOrNot(LandingActivity.this, true);
+                        rel_sync_loans.setVisibility(View.GONE);
+                        txt_successful.setVisibility(View.VISIBLE);
+                    }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*private void getLoanDetails() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://pocketsapi.mybluemix.net/rest/Loan/")
@@ -216,14 +255,14 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         call.enqueue(new Callback<List<LoanModel>>() {
             @Override
             public void onResponse(Call<List<LoanModel>> call, Response<List<LoanModel>> response) {
-/*
+*//*
                 swipeRefreshLayout.post(new Runnable() {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });
-                */
+                *//*
                 List<LoanModel> loanModels = response.body();
                 String outstandingAmt = loanModels.get(1).getPrincipal_outstanding();
                 String rateOfInterest = loanModels.get(1).getRate_of_interest();
@@ -234,13 +273,13 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void onFailure(Call<List<LoanModel>> call, Throwable t) {
-            /*    swipeRefreshLayout.post(new Runnable() {
+            *//*    swipeRefreshLayout.post(new Runnable() {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });
-                */
+                *//*
                 showToast("No Internet Connection");
             }
 
@@ -248,5 +287,5 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         });
 
 
-    }
+    }*/
 }

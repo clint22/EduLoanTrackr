@@ -59,46 +59,63 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:layout_marginTop="15dp"
-            android:theme="@style/CircularProgress"
-            />
+            android:theme="@style/CircularProgress" />
 
 
     </RelativeLayout>
 
-    <ImageView
-
-        android:id="@+id/img_edu_loan"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_below="@+id/rel_balance"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:src="@drawable/eduloan" />
-
     <TextView
-        android:id="@+id/txt_edu_desc"
+        android:id="@+id/txt_successful"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/img_edu_loan"
+        android:layout_below="@+id/rel_balance"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="You haven't added any loans yet"
-        android:textSize="18sp" />
+        android:layout_marginTop="25dp"
+        android:text="Loan Added Successfully"
+        android:visibility="gone" />
 
-    <Button
-        android:id="@+id/buttonLogin"
+    <RelativeLayout
+        android:id="@+id/rel_sync_loans"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_edu_desc"
-        android:layout_marginLeft="26dp"
-        android:layout_marginRight="26dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/ripple_background_primary"
-        android:minHeight="0dp"
-        android:padding="15dp"
-        android:text="SYNC YOUR LOANS"
-        android:textColor="#ffffff"
-        android:textSize="15dp" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rel_balance"
+        android:visibility="gone">
+
+        <ImageView
+
+            android:id="@+id/img_edu_loan"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/eduloan" />
+
+        <TextView
+            android:id="@+id/txt_edu_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_edu_loan"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="You haven't added any loans yet"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_edu_desc"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="26dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ripple_background_primary"
+            android:minHeight="0dp"
+            android:padding="15dp"
+            android:text="SYNC YOUR LOANS"
+            android:textColor="#ffffff"
+            android:textSize="15dp" />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>
