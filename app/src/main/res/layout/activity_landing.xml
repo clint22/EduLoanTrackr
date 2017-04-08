@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_landing"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context="com.example.appathon.eduloantracker.Views.LandingActivity">
+
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/rel_balance"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@+id/toolbar"
+        android:background="#EEEEEE">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="5dp"
+            android:padding="10dp"
+            android:src="@drawable/graduate"
+            app:civ_border_color="#2E7D32"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/txt_header_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/profile_image"
+            android:text="TOTAL BALANCE"
+            android:textColor="#757575"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_header_balance"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/profile_image"
+            android:textColor="#757575"
+            android:textSize="15sp"
+            android:visibility="visible" />
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:theme="@style/CircularProgress"
+            />
+
+
+    </RelativeLayout>
+
+    <ImageView
+
+        android:id="@+id/img_edu_loan"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_below="@+id/rel_balance"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/eduloan" />
+
+    <TextView
+        android:id="@+id/txt_edu_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_edu_loan"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="You haven't added any loans yet"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_edu_desc"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ripple_background_primary"
+        android:minHeight="0dp"
+        android:padding="15dp"
+        android:text="SYNC YOUR LOANS"
+        android:textColor="#ffffff"
+        android:textSize="15dp" />
+
+
+</RelativeLayout>
