@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import com.example.appathon.eduloantracker.Constants;
 import com.example.appathon.eduloantracker.PreferencesHelper;
 import com.example.appathon.eduloantracker.R;
+import com.example.appathon.eduloantracker.Utils;
 import com.example.appathon.eduloantracker.Validation;
 import com.example.appathon.eduloantracker.model.LoanModel;
 import com.example.appathon.eduloantracker.service.BankInterface;
@@ -119,6 +120,7 @@ public class LoanDetailActivity extends BaseActivity implements View.OnClickList
                     Intent intent = new Intent();
                     intent.putExtra("out_amount", outstandingAmt);
                     intent.putExtra("interest", rateOfInterest);
+                    intent.putExtra("tenure", Utils.getString(edtxt_tenure));
                     setResult(RESULT_OK, intent);
                     finish();
 

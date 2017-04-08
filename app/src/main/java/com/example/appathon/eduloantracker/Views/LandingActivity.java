@@ -18,6 +18,7 @@ import com.example.appathon.eduloantracker.R;
 import com.example.appathon.eduloantracker.SharedPref;
 import com.example.appathon.eduloantracker.UriList;
 import com.example.appathon.eduloantracker.UserSessionManager;
+import com.example.appathon.eduloantracker.Utils;
 import com.example.appathon.eduloantracker.model.AccountBalance;
 import com.example.appathon.eduloantracker.model.AccountsModel;
 import com.example.appathon.eduloantracker.model.AuthModel;
@@ -45,9 +46,24 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     TextView txt_successful;
     @BindView(R.id.rel_sync_loans)
     RelativeLayout rel_sync_loans;
+    @BindView(R.id.rel_loan_dashboard)
+    RelativeLayout rel_loan_dashboard;
+    @BindView(R.id.btnPayLoan)
+    Button btnPayLoan;
+    @BindView(R.id.txt_total_loan)
+    TextView txt_total_loan;
+    @BindView(R.id.txt_interest_rate)
+    TextView txt_interest_rate;
+    @BindView(R.id.txt_total_balance)
+    TextView txt_total_balance;
+    @BindView(R.id.txt_total_monthly_pay)
+    TextView txt_total_monthly_pay;
 
+    private int loanAmount, tenure;
+    private double interestRate;
     private Boolean loanAddedOrNot = true;
     UserSessionManager session;
+    private String loan_amt, loan_tenure, loan_ior;
 
 
     @Override
@@ -62,11 +78,13 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
         if (SharedPref.getLoanAddedOrNot(LandingActivity.this)) {
 
-            txt_successful.setVisibility(View.VISIBLE);
+            setLoanDetails();
+
+
         } else {
 
-            rel_sync_loans.setVisibility(View.VISIBLE);
 
+            rel_sync_loans.setVisibility(View.VISIBLE);
         }
 
 
@@ -77,9 +95,22 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
     }
 
+    private void setLoanDetails() {
+
+        rel_loan_dashboard.setVisibility(View.VISIBLE);
+
+
+        txt_interest_rate.setText(SharedPref.getInterestRate(LandingActivity.this));
+        txt_total_balance.setText(SharedPref.getTotalBalance(LandingActivity.this));
+        txt_total_monthly_pay.setText(SharedPref.getMonthlyPayment(LandingActivity.this));
+        txt_total_loan.setText("1");
+
+    }
+
     private void setClicks() {
 
         btn_login.setOnClickListener(this);
+        btnPayLoan.setOnClickListener(this);
     }
 
 
@@ -201,6 +232,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
                 session.logoutUser();
                 return true;
 
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -213,6 +245,14 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
             case R.id.buttonLogin:
                 Intent intent = new Intent(LandingActivity.this, LoanDetailActivity.class);
                 startActivityForResult(intent, Constants.LOAN_VERIFY);
+                break;
+            case R.id.btnPayLoan:
+                loanAmount = Integer.parseInt(loan_amt);
+                tenure = Integer.parseInt(loan_tenure);
+                interestRate = Double.parseDouble(loan_ior);
+                double monthly_pay = calculateMonthlyPayment(loanAmount, tenure, interestRate);
+                float monthly_pay_round = Math.round(monthly_pay);
+                Log.e("monthlypay", String.valueOf(monthly_pay_round));
                 break;
         }
     }
@@ -227,19 +267,52 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
                 case Constants.LOAN_VERIFY:
                     if (data == null || data.getExtras() == null) return;
-                    if (data.getExtras().containsKey("out_amount")) {
+                    if (Utils.isNotEmpty(data.getExtras().getString("out_amount")) && Utils.isNotEmpty(data.getExtras().getString("interest"))
+                            && Utils.isNotEmpty(data.getExtras().getString("tenure"))) {
 
                         showToast("Contains Key");
-                        Log.e("keyvalue", data.getExtras().getString("out_amount"));
-                        SharedPref.setLoanAddedOrNot(LandingActivity.this, true);
                         rel_sync_loans.setVisibility(View.GONE);
-                        txt_successful.setVisibility(View.VISIBLE);
+                        rel_loan_dashboard.setVisibility(View.VISIBLE);
+                        SharedPref.setLoanAddedOrNot(LandingActivity.this, true);
+
+                        loan_amt = data.getExtras().getString("out_amount");
+                        loan_tenure = data.getExtras().getString("tenure");
+                        loan_ior = data.getExtras().getString("interest");
+                        loan_ior = loan_ior.replace("%", "");
+                        calcLoan();
+
+                        Log.e("loandets", Utils.getString(loan_amt));
+
+
                     }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void calcLoan() {
+
+        loanAmount = Integer.parseInt(loan_amt);
+        tenure = Integer.parseInt(loan_tenure);
+        interestRate = Double.parseDouble(loan_ior);
+        double monthly_pay = calculateMonthlyPayment(loanAmount, tenure, interestRate);
+        float monthly_pay_round = Math.round(monthly_pay);
+        Log.e("monthlypay", String.valueOf(monthly_pay_round));
+
+        SharedPref.setInterestRate(LandingActivity.this, loan_ior);
+        txt_interest_rate.setText(loan_ior);
+
+        SharedPref.setTotalBalance(LandingActivity.this, loan_amt);
+        txt_total_balance.setText(loan_amt);
+
+        SharedPref.setMonthlyPayment(LandingActivity.this, String.valueOf(monthly_pay_round));
+        txt_total_monthly_pay.setText(String.valueOf(monthly_pay_round));
+
+        txt_total_loan.setText("1");
+
+
     }
 
     /*private void getLoanDetails() {
