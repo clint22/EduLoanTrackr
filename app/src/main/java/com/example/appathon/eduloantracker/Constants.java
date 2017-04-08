@@ -10,4 +10,7 @@ public class Constants {
     public static final String ACNO_PREF_KEY = "acno_key";
     public static final String LOAN_ACNO_PREF_KEY = "loan_key";
     public static final String OUT_AMT_KEY = "outstanding_amt";
+    public static final String LOAN_NO = "loan_no";
+    public static final String AGMNT_ID = "agree_id";
+    public static final String LAST_THREE = "last_three";
 }

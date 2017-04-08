@@ -99,5 +99,12 @@
         android:text="status"
         android:gravity="center"
         android:layout_height="50dp" />
+    <Button
+        android:id="@+id/next_page"
+        android:layout_below="@+id/loan_txt"
+        android:layout_width="match_parent"
+        android:text="NEXT"
+        android:gravity="center"
+        android:layout_height="50dp" />
 </RelativeLayout>
 </ScrollView>

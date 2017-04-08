@@ -1,6 +1,7 @@
 package com.example.appathon.eduloantracker;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -29,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textView,display,getAccount,account,balbt,baltxt,refresh,getLoan,loanTxt;
+    private TextView textView,display,getAccount,account,balbt,baltxt,refresh,getLoan,loanTxt,np;
     private EditText email;
     private String URL="https://corporateapiprojectwar.mybluemix.net/corporate_banking/";
     private String outAmt;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView=(TextView)findViewById(R.id.button);
+        np=(TextView)findViewById(R.id.next_page);
         getLoan=(TextView)findViewById(R.id.get_loan);
         loanTxt=(TextView)findViewById(R.id.loan_txt);
         refresh=(TextView)findViewById(R.id.refresh);
@@ -117,6 +119,12 @@ public class MainActivity extends AppCompatActivity {
                 getLoanDetails();
             }
         });
+        np.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,LoanEmi.class));
+            }
+        });
 
 /*
         mrecyclerView = (RecyclerView)findViewById(R.id.card_recycler_view);
@@ -169,7 +177,11 @@ public class MainActivity extends AppCompatActivity {
                 */
                 List<LoanModel> loanModels=response.body();
                 String outstandingAmt=loanModels.get(1).getPrincipalOutstanding();
+                String loanNo=loanModels.get(1).getLoanNo();
+                String agreeId=loanModels.get(1).getAgreementId();
                 PreferencesHelper.getInstance(MainActivity.this).storeUnencryptedSetting(Constants.OUT_AMT_KEY, outstandingAmt);
+                PreferencesHelper.getInstance(MainActivity.this).storeUnencryptedSetting(Constants.LOAN_NO, loanNo);
+                PreferencesHelper.getInstance(MainActivity.this).storeUnencryptedSetting(Constants.AGMNT_ID, agreeId);
                 loanTxt.setText(outstandingAmt);
             }
 
