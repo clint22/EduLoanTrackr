@@ -334,9 +334,13 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
                 .onPositive(new BottomDialog.ButtonCallback() {
                     @Override
                     public void onClick(BottomDialog dialog) {
-
+                    getAnalysis();
                     }
                 }).show();
+    }
+
+    private void getAnalysis() {
+
     }
 
     /*private void getLoanDetails() {

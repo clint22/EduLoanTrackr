@@ -223,6 +223,50 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/layout_analysis"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@+id/rel_loan_dashboard"
+        android:background="#EEEEEE">
+
+
+
+        <TextView
+            android:id="@+id/txt_last_three_emi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:text="Last three loan emi"
+            android:textColor="#757575"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt_emi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_last_three_emi"
+            android:layout_marginLeft="10dp"
+            android:textColor="#757575"
+            android:textSize="15sp"
+            android:visibility="visible" />
+
+        <ProgressBar
+            android:id="@+id/progressbar_analysis"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="30dp"
+            android:visibility="gone"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:theme="@style/CircularProgress" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
         android:id="@+id/rel_sync_loans"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
