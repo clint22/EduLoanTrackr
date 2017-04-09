@@ -23,6 +23,7 @@ import com.example.appathon.eduloantracker.model.AccountBalance;
 import com.example.appathon.eduloantracker.model.AccountsModel;
 import com.example.appathon.eduloantracker.model.AuthModel;
 import com.example.appathon.eduloantracker.service.BankInterface;
+import com.github.javiersantos.bottomdialogs.BottomDialog;
 
 import java.util.List;
 
@@ -247,12 +248,15 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
                 startActivityForResult(intent, Constants.LOAN_VERIFY);
                 break;
             case R.id.btnPayLoan:
-                loanAmount = Integer.parseInt(loan_amt);
+                getDialog();
+           /*     loanAmount = Integer.parseInt(loan_amt);
                 tenure = Integer.parseInt(loan_tenure);
                 interestRate = Double.parseDouble(loan_ior);
+
                 double monthly_pay = calculateMonthlyPayment(loanAmount, tenure, interestRate);
                 float monthly_pay_round = Math.round(monthly_pay);
                 Log.e("monthlypay", String.valueOf(monthly_pay_round));
+                */
                 break;
         }
     }
@@ -313,6 +317,26 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         txt_total_loan.setText("1");
 
 
+    }
+
+    public void getDialog() {
+        new BottomDialog.Builder(this)
+                .setTitle("LOAN ADVISORY FLOW ")
+                .setContent("You can either choose to follow our payment plans or create one of your own manually")
+                .setIcon(R.drawable.dollar)
+                .setPositiveText("our plan")
+                .setNegativeText("Generate Yourself ")
+                .setNegativeTextColorResource(R.color.colorPrimary)
+                .setPositiveBackgroundColorResource(R.color.colorPrimary)
+                //.setPositiveBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary)
+                .setPositiveTextColorResource(android.R.color.white)
+                //.setPositiveTextColor(ContextCompat.getColor(this, android.R.color.colorPrimary)
+                .onPositive(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(BottomDialog dialog) {
+
+                    }
+                }).show();
     }
 
     /*private void getLoanDetails() {

@@ -208,7 +208,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="25dp"
                     android:layout_marginTop="10dp"
-                    android:text="Pay Monthly Loan"
+                    android:text="ANALYSE LOAN"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="@drawable/rounded_btn"
