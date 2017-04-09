@@ -26,7 +26,12 @@ import com.example.appathon.eduloantracker.model.AuthModel;
 import com.example.appathon.eduloantracker.model.EmiModel;
 import com.example.appathon.eduloantracker.service.BankInterface;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,6 +46,8 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
+    @BindView(R.id.progressbar_analysis)
+    ProgressBar progressBar2;
     @BindView(R.id.txt_balance)
     TextView txt_balance;
     @BindView(R.id.buttonLogin)
@@ -61,12 +68,21 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     TextView txt_total_balance;
     @BindView(R.id.txt_total_monthly_pay)
     TextView txt_total_monthly_pay;
+    @BindView(R.id.txt_emi)
+    TextView txt_last_three;
+    @BindView(R.id.txt_last_three_emi)
+    TextView txt_last_three_emi;
+    @BindView(R.id.txt_emi_nos)
+    TextView txt_emi_nos;
+    @BindView(R.id.txt_total_emi)
+    TextView txt_total_emi;
 
     private int loanAmount, tenure;
     private double interestRate;
     private Boolean loanAddedOrNot = true;
     UserSessionManager session;
     private String loan_amt, loan_tenure, loan_ior,loanNo,loanAg,loanOut,token;
+    private LineChart chart;
 
 
     @Override
@@ -76,6 +92,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         setToolBar("EduLoanTrackr");
         ButterKnife.bind(this);
         session = new UserSessionManager(getApplicationContext());
+        chart = (LineChart) findViewById(R.id.chart);
         if (session.checkLogin())
             finish();
 
@@ -342,6 +359,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void getAnalysis() {
+        progressBar2.setVisibility(View.VISIBLE);
         token=PreferencesHelper.getInstance(this).getUnencryptedSetting(Constants.TOKEN_PREF_KEY);
         loanAg=PreferencesHelper.getInstance(this).getUnencryptedSetting(Constants.AGMNT_ID);
         loanNo=PreferencesHelper.getInstance(this).getUnencryptedSetting(Constants.LOAN_NO);
@@ -364,8 +382,25 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
                 */
                     List<EmiModel> emiModels=response.body();
                     String lastThree=emiModels.get(1).getLastThreeEMIs();
+                    String totalEmis=emiModels.get(1).getNoOfEMIs();
                     PreferencesHelper.getInstance(LandingActivity.this).storeUnencryptedSetting(Constants.LAST_THREE, lastThree);
-              //      loanTxt.setText(lastThree);
+                    txt_last_three.setText(lastThree);
+                    txt_emi_nos.setText(totalEmis);
+                    txt_last_three_emi.setVisibility(View.VISIBLE);
+                    txt_total_emi.setVisibility(View.VISIBLE);
+                    progressBar2.setVisibility(View.GONE);
+
+                    List<Entry> entries = new ArrayList<Entry>();
+                    entries.add(new Entry(2, 5000));
+                    entries.add(new Entry(4, 5500));
+                    entries.add(new Entry(9, 6000));
+                    LineDataSet dataSet = new LineDataSet(entries, "Label"); // add entries to dataset
+                    dataSet.setColor(R.color.colorPrimary);
+                    dataSet.setValueTextColor(R.color.white);
+                    LineData lineData = new LineData(dataSet);
+                    chart.setVisibility(View.VISIBLE);
+                    chart.setData(lineData);
+                    chart.invalidate(); // refresh
                 }
 
                 @Override
@@ -376,7 +411,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });
-                */
+                */  progressBar2.setVisibility(View.GONE);
                     Toast.makeText(LandingActivity.this,t.toString(), Toast.LENGTH_SHORT).show();
                 }
 

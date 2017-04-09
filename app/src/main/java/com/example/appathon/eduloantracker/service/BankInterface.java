@@ -3,6 +3,7 @@ package com.example.appathon.eduloantracker.service;
 import com.example.appathon.eduloantracker.model.AccountBalance;
 import com.example.appathon.eduloantracker.model.AccountsModel;
 import com.example.appathon.eduloantracker.model.AuthModel;
+import com.example.appathon.eduloantracker.model.EmiModel;
 import com.example.appathon.eduloantracker.model.LoanModel;
 
 import java.util.List;
@@ -33,5 +34,8 @@ public interface BankInterface {
 
     @GET("getLoanDetails?clientId=krisnavneet.nk@gmail.com")
     Call<List<LoanModel>> getLoanDetails(@Query("param") String param, @Query("authToken") String token);
+
+    @GET("EMIDetails?clientId=krisnavneet.nk@gmail.com")
+    Call<List<EmiModel>> getEmi(@Query("loan_no") String loanNo, @Query("agreeID") String agreeId, @Query("authToken") String token);
 
 }
