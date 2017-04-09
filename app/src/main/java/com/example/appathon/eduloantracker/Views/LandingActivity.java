@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.appathon.eduloantracker.Constants;
 import com.example.appathon.eduloantracker.PreferencesHelper;
@@ -22,6 +23,7 @@ import com.example.appathon.eduloantracker.Utils;
 import com.example.appathon.eduloantracker.model.AccountBalance;
 import com.example.appathon.eduloantracker.model.AccountsModel;
 import com.example.appathon.eduloantracker.model.AuthModel;
+import com.example.appathon.eduloantracker.model.EmiModel;
 import com.example.appathon.eduloantracker.service.BankInterface;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 
@@ -64,7 +66,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     private double interestRate;
     private Boolean loanAddedOrNot = true;
     UserSessionManager session;
-    private String loan_amt, loan_tenure, loan_ior;
+    private String loan_amt, loan_tenure, loan_ior,loanNo,loanAg,loanOut,token;
 
 
     @Override
@@ -340,53 +342,48 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void getAnalysis() {
-
-    }
-
-    /*private void getLoanDetails() {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://pocketsapi.mybluemix.net/rest/Loan/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        BankInterface request = retrofit.create(BankInterface.class);
-        String token = PreferencesHelper.getInstance(LandingActivity.this).getUnencryptedSetting(Constants.TOKEN_PREF_KEY);
-        String accno = PreferencesHelper.getInstance(LandingActivity.this).getUnencryptedSetting(Constants.LOAN_ACNO_PREF_KEY);
-        Call<List<LoanModel>> call = request.getLoanDetails(accno, token);
-        call.enqueue(new Callback<List<LoanModel>>() {
-            @Override
-            public void onResponse(Call<List<LoanModel>> call, Response<List<LoanModel>> response) {
-*//*
+        token=PreferencesHelper.getInstance(this).getUnencryptedSetting(Constants.TOKEN_PREF_KEY);
+        loanAg=PreferencesHelper.getInstance(this).getUnencryptedSetting(Constants.AGMNT_ID);
+        loanNo=PreferencesHelper.getInstance(this).getUnencryptedSetting(Constants.LOAN_NO);
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("https://pocketsapi.mybluemix.net/rest/Loan/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            BankInterface request = retrofit.create(BankInterface.class);
+            Call<List<EmiModel>> call=request.getEmi(loanNo,loanAg,token);
+            call.enqueue(new Callback<List<EmiModel>>() {
+                @Override
+                public void onResponse(Call<List<EmiModel>> call, Response<List<EmiModel>> response) {
+/*
                 swipeRefreshLayout.post(new Runnable() {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });
-                *//*
-                List<LoanModel> loanModels = response.body();
-                String outstandingAmt = loanModels.get(1).getPrincipal_outstanding();
-                String rateOfInterest = loanModels.get(1).getRate_of_interest();
-                PreferencesHelper.getInstance(LandingActivity.this).storeUnencryptedSetting(Constants.OUT_AMT_KEY, outstandingAmt);
-                Log.e("loandet", rateOfInterest);
-                goToActivity(LandingActivity.this, LoanDetailActivity.class);
-            }
+                */
+                    List<EmiModel> emiModels=response.body();
+                    String lastThree=emiModels.get(1).getLastThreeEMIs();
+                    PreferencesHelper.getInstance(LandingActivity.this).storeUnencryptedSetting(Constants.LAST_THREE, lastThree);
+              //      loanTxt.setText(lastThree);
+                }
 
-            @Override
-            public void onFailure(Call<List<LoanModel>> call, Throwable t) {
-            *//*    swipeRefreshLayout.post(new Runnable() {
+                @Override
+                public void onFailure(Call<List<EmiModel>> call, Throwable t) {
+            /*    swipeRefreshLayout.post(new Runnable() {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });
-                *//*
-                showToast("No Internet Connection");
-            }
+                */
+                    Toast.makeText(LandingActivity.this,t.toString(), Toast.LENGTH_SHORT).show();
+                }
 
 
-        });
+            });
 
 
-    }*/
+    }
+
 }

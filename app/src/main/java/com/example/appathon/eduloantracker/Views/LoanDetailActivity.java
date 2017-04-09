@@ -38,7 +38,7 @@ public class LoanDetailActivity extends BaseActivity implements View.OnClickList
     @BindView(R.id.buttonGenerate)
     Button btnGenerate;
 
-    private String outstandingAmt, rateOfInterest;
+    private String outstandingAmt, rateOfInterest,loanNo,agmntID;
 
 
     @Override
@@ -81,7 +81,11 @@ public class LoanDetailActivity extends BaseActivity implements View.OnClickList
                 List<LoanModel> loanModels = response.body();
                 outstandingAmt = loanModels.get(1).getPrincipal_outstanding();
                 rateOfInterest = loanModels.get(1).getRate_of_interest();
+                loanNo=loanModels.get(1).getLoanNo();
+                agmntID=loanModels.get(1).getAgreementId();
                 PreferencesHelper.getInstance(LoanDetailActivity.this).storeUnencryptedSetting(Constants.OUT_AMT_KEY, outstandingAmt);
+                PreferencesHelper.getInstance(LoanDetailActivity.this).storeUnencryptedSetting(Constants.LOAN_NO, loanNo);
+                PreferencesHelper.getInstance(LoanDetailActivity.this).storeUnencryptedSetting(Constants.AGMNT_ID, agmntID);
 
                 lin_loan_balance.setVisibility(View.VISIBLE);
 

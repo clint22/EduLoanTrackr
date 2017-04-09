@@ -1,5 +1,6 @@
 package com.example.appathon.eduloantracker.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -15,6 +16,14 @@ public class LoanModel {
     @SerializedName("roi")
     private String rate_of_interest;
 
+    @SerializedName("loan_no")
+    @Expose
+    private String loanNo;
+
+    @SerializedName("agreementId")
+    @Expose
+    private String agreementId;
+
     public String getRate_of_interest() {
         return rate_of_interest;
     }
@@ -29,5 +38,13 @@ public class LoanModel {
 
     public void setPrincipal_outstanding(String principal_outstanding) {
         this.principal_outstanding = principal_outstanding;
+    }
+
+    public String getLoanNo() {
+        return loanNo;
+    }
+
+    public String getAgreementId() {
+        return agreementId;
     }
 }
