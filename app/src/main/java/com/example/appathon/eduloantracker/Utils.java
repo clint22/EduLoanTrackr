@@ -29,4 +29,15 @@ public final class Utils {
         }
         return "";
     }
+
+    public static Boolean isNotEmpty(Object param) {
+        try {
+            String field = getString(param);
+            return !(field.trim().isEmpty() || field.trim().equals("") || field.equals("null"));
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
