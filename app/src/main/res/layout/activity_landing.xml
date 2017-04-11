@@ -1,346 +1,353 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_landing"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context="com.example.appathon.eduloantracker.Views.LandingActivity">
+    android:fillViewport="true">
 
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-
-    <RelativeLayout
-        android:id="@+id/rel_balance"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_landing"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_below="@+id/toolbar"
-        android:background="#EEEEEE">
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        tools:context="com.example.appathon.eduloantracker.Views.LandingActivity">
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_image"
-            android:layout_width="70dp"
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <RelativeLayout
+            android:id="@+id/rel_balance"
+            android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginLeft="5dp"
-            android:padding="10dp"
-            android:src="@drawable/graduate"
-            app:civ_border_color="#2E7D32"
-            app:civ_border_width="2dp" />
+            android:layout_below="@+id/toolbar"
+            android:background="#EEEEEE">
 
-        <TextView
-            android:id="@+id/txt_header_balance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_toRightOf="@+id/profile_image"
-            android:text="TOTAL BALANCE"
-            android:textColor="#757575"
-            android:textSize="16sp" />
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="5dp"
+                android:padding="10dp"
+                android:src="@drawable/graduate"
+                app:civ_border_color="#2E7D32"
+                app:civ_border_width="2dp" />
 
-        <TextView
-            android:id="@+id/txt_balance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_header_balance"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/profile_image"
-            android:textColor="#757575"
-            android:textSize="15sp"
-            android:visibility="visible" />
+            <TextView
+                android:id="@+id/txt_header_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/profile_image"
+                android:text="TOTAL BALANCE"
+                android:textColor="#757575"
+                android:textSize="16sp" />
 
-        <ProgressBar
-            android:id="@+id/progressbar"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="15dp"
-            android:theme="@style/CircularProgress" />
+            <TextView
+                android:id="@+id/txt_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_header_balance"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/profile_image"
+                android:textColor="#757575"
+                android:textSize="15sp"
+                android:visibility="visible" />
+
+            <ProgressBar
+                android:id="@+id/progressbar"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:theme="@style/CircularProgress" />
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/txt_successful"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rel_balance"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:text="Loan Added Successfully"
-        android:visibility="gone" />
 
-    <RelativeLayout
-        android:id="@+id/rel_loan_dashboard"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/rel_balance"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textSize="18sp"
-            android:textColor="@color/colorPrimary"
-            android:text="LOAN DETAILS"/>
-
-        <android.support.v7.widget.CardView
+        <RelativeLayout
+            android:id="@+id/rel_loan_dashboard"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="30dp">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rel_balance"
+            android:layout_marginTop="20dp"
+            android:visibility="visible">
 
-            <RelativeLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="LOAN DETAILS"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="220dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/ripple_background_white"
+                card_view:cardUseCompatPadding="true">
 
-                <View
-                    android:layout_marginTop="10dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:background="#4DD0E1"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/desc_total_loan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="18dp"
-                    android:text="Total Loans"
-                    android:textColor="#9E9E9E"
-                    android:textSize="16sp" />
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#4DD0E1" />
 
-                <TextView
-                    android:id="@+id/txt_total_loan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/desc_total_loan"
-                    android:layout_marginLeft="60dp"
-                    android:textColor="#212121"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/desc_total_loan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="18dp"
+                        android:text="Total Loans"
+                        android:textColor="#9E9E9E"
+                        android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/desc_interest_rate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginTop="18dp"
-                    android:text="Avg. Interest Rate"
-                    android:textColor="#9E9E9E"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/txt_total_loan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/desc_total_loan"
+                        android:layout_marginLeft="60dp"
+                        android:textColor="#212121"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txt_interest_rate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/desc_interest_rate"
-                    android:layout_marginRight="60dp"
-                    android:layout_alignParentRight="true"
-                    android:textColor="#212121"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/desc_interest_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="18dp"
+                        android:text="Avg. Interest Rate"
+                        android:textColor="#9E9E9E"
+                        android:textSize="16sp" />
 
-
-                <TextView
-                    android:id="@+id/desc_total_balance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/txt_total_loan"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Total Balance"
-                    android:textColor="#9E9E9E"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/txt_interest_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/desc_interest_rate"
+                        android:layout_marginRight="60dp"
+                        android:textColor="#212121"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
 
-                <TextView
-                    android:id="@+id/txt_total_balance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_total_loan"
-                    android:layout_toRightOf="@+id/desc_total_balance"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginLeft="50dp"
-                    android:textColor="#212121"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/desc_total_monthly_pay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/desc_total_balance"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Monthly Payment"
-                    android:textColor="#9E9E9E"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/desc_total_balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/txt_total_loan"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Total Balance"
+                        android:textColor="#9E9E9E"
+                        android:textSize="16sp" />
 
 
-                <TextView
-                    android:id="@+id/txt_total_monthly_pay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_total_balance"
-                    android:layout_toRightOf="@+id/desc_total_balance"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginLeft="50dp"
-                    android:textColor="#212121"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/txt_total_balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_total_loan"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_toRightOf="@+id/desc_total_balance"
+                        android:textColor="#212121"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/btnPayLoan"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginTop="10dp"
-                    android:text="ANALYSE LOAN"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:background="@drawable/rounded_btn"
-                    android:layout_width="130dp"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:layout_below="@+id/txt_total_monthly_pay"/>
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/layout_analysis"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_alignParentBottom="true"
-        android:background="#EEEEEE">
+                    <TextView
+                        android:id="@+id/desc_total_monthly_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/desc_total_balance"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Monthly Payment"
+                        android:textColor="#9E9E9E"
+                        android:textSize="16sp" />
 
 
+                    <TextView
+                        android:id="@+id/txt_total_monthly_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_total_balance"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_toRightOf="@+id/desc_total_balance"
+                        android:textColor="#212121"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txt_last_three_emi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:visibility="gone"
-            android:text="LAST THREE LOAN EMI"
-            android:textColor="#757575"
-            android:textSize="16sp" />
-        <TextView
-            android:id="@+id/txt_total_emi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="15dp"
-            android:text="TOTAL EMIs"
-            android:textColor="#757575"
-            android:visibility="gone"
-            android:textSize="16sp" />
+                    <Button
+                        android:id="@+id/btnPayLoan"
+                        android:layout_width="130dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/txt_total_monthly_pay"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/rounded_btn"
+                        android:gravity="center"
+                        android:text="ANALYSE LOAN"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryDark" />
 
-        <TextView
-            android:id="@+id/txt_emi"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_last_three_emi"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/darkBack"
-            android:textSize="15sp"
-            android:visibility="visible" />
+                </RelativeLayout>
 
-        <TextView
-            android:id="@+id/txt_emi_nos"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_total_emi"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/darkBack"
-            android:textSize="15sp"
-            android:visibility="visible" />
+            </android.support.v7.widget.CardView>
 
-        <ProgressBar
-            android:id="@+id/progressbar_analysis"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="30dp"
-            android:visibility="gone"
-            android:layout_height="30dp"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="15dp"
-            android:theme="@style/CircularProgress" />
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chart"
-            android:layout_marginTop="10dp"
-            android:visibility="gone"
-            android:layout_below="@+id/txt_emi"
-            android:layout_width="match_parent"
-            android:layout_height="250dp" />
+        </RelativeLayout>
 
 
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/rel_sync_loans"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/rel_balance"
-        android:visibility="gone">
-
-        <ImageView
-
-            android:id="@+id/img_edu_loan"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="70dp"
-            android:src="@drawable/eduloan" />
-
-        <TextView
-            android:id="@+id/txt_edu_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/img_edu_loan"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="You haven't added any loans yet"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/buttonLogin"
+        <RelativeLayout
+            android:id="@+id/rel_horizontal_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_edu_desc"
-            android:layout_marginLeft="26dp"
-            android:layout_marginRight="26dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/ripple_background_primary"
-            android:minHeight="0dp"
-            android:padding="15dp"
-            android:text="SYNC YOUR LOANS"
-            android:textColor="#ffffff"
-            android:textSize="15dp" />
+            android:layout_below="@id/rel_loan_dashboard"
+            android:visibility="visible">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/ripple_background_white"
+                card_view:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ProgressBar
+                        android:id="@+id/pb"
+                        style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                        android:layout_width="260dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="90dp"
+                        android:layout_marginTop="45dp" />
+
+                    <TextView
+                        android:id="@+id/total_perc_loan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="45dp"
+                        android:text="Rs. 2,00,000" />
+
+                    <TextView
+                        android:id="@+id/paid_off"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/pb"
+                        android:layout_marginBottom="-45dp"
+                        android:layout_marginLeft="95dp"
+                        android:text="Paid off Rs. 13,500"
+                        android:textColor="@color/colorPrimary"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/perc_loan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/total_perc_loan"
+                        android:layout_marginLeft="95dp"
+                        android:text="26%"
+                        android:textColor="@color/colorPrimary" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_loan_desc"
+            android:layout_below="@+id/rel_horizontal_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/txt_loan_desc"
+                android:text="For a loan with a balance of $35000 at a 5.7% average interest rate and 10-year term, your total monthly payment would be $383"
+                android:padding="15dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:textSize="17sp"
+                android:textColor="#006064"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rel_sync_loans"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rel_balance"
+            android:visibility="gone">
+
+            <ImageView
+
+                android:id="@+id/img_edu_loan"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="70dp"
+                android:src="@drawable/eduloan" />
+
+            <TextView
+                android:id="@+id/txt_edu_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_edu_loan"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="You haven't added any loans yet"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_edu_desc"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="26dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/ripple_background_primary"
+                android:minHeight="0dp"
+                android:padding="15dp"
+                android:text="SYNC YOUR LOANS"
+                android:textColor="#ffffff"
+                android:textSize="15dp" />
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
-
-
-</RelativeLayout>
+</ScrollView>

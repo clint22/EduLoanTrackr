@@ -2,6 +2,8 @@ package com.example.appathon.eduloantracker.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,7 +13,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.appathon.eduloantracker.Constants;
 import com.example.appathon.eduloantracker.PreferencesHelper;
@@ -23,15 +24,9 @@ import com.example.appathon.eduloantracker.Utils;
 import com.example.appathon.eduloantracker.model.AccountBalance;
 import com.example.appathon.eduloantracker.model.AccountsModel;
 import com.example.appathon.eduloantracker.model.AuthModel;
-import com.example.appathon.eduloantracker.model.EmiModel;
 import com.example.appathon.eduloantracker.service.BankInterface;
-import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -44,16 +39,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LandingActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.progressbar)
-    ProgressBar progressBar;
-    @BindView(R.id.progressbar_analysis)
-    ProgressBar progressBar2;
     @BindView(R.id.txt_balance)
     TextView txt_balance;
     @BindView(R.id.buttonLogin)
     Button btn_login;
-    @BindView(R.id.txt_successful)
-    TextView txt_successful;
     @BindView(R.id.rel_sync_loans)
     RelativeLayout rel_sync_loans;
     @BindView(R.id.rel_loan_dashboard)
@@ -68,7 +57,21 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     TextView txt_total_balance;
     @BindView(R.id.txt_total_monthly_pay)
     TextView txt_total_monthly_pay;
-    @BindView(R.id.txt_emi)
+    @BindView(R.id.pb)
+    ProgressBar progressBar;
+    @BindView(R.id.perc_loan)
+    TextView txt_perc_loan;
+    @BindView(R.id.progressbar)
+    ProgressBar progressBartwo;
+    @BindView(R.id.rel_horizontal_bar)
+    RelativeLayout rel_horizontal_bar;
+    @BindView(R.id.paid_off)
+    TextView txt_paid_off;
+    @BindView(R.id.total_perc_loan)
+    TextView txt_total_perc_loan;
+    @BindView(R.id.txt_loan_desc)
+    TextView txt_loan_desc;
+   /* @BindView(R.id.txt_emi)
     TextView txt_last_three;
     @BindView(R.id.txt_last_three_emi)
     TextView txt_last_three_emi;
@@ -76,13 +79,18 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     TextView txt_emi_nos;
     @BindView(R.id.txt_total_emi)
     TextView txt_total_emi;
+    @BindView(R.id.progressbar_analysis)
+    ProgressBar progressBar2;*/
 
     private int loanAmount, tenure;
     private double interestRate;
+    private double tot_balance, tot;
     private Boolean loanAddedOrNot = true;
     UserSessionManager session;
-    private String loan_amt, loan_tenure, loan_ior,loanNo,loanAg,loanOut,token;
+    private String loan_amt, loan_tenure, loan_ior, loanNo, loanAg, loanOut, token;
     private LineChart chart;
+    private int progressStatus = 0;
+    private Handler handler = new Handler();
 
 
     @Override
@@ -92,7 +100,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         setToolBar("EduLoanTrackr");
         ButterKnife.bind(this);
         session = new UserSessionManager(getApplicationContext());
-        chart = (LineChart) findViewById(R.id.chart);
+//        chart = (LineChart) findViewById(R.id.chart);
         if (session.checkLogin())
             finish();
 
@@ -118,12 +126,38 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     private void setLoanDetails() {
 
         rel_loan_dashboard.setVisibility(View.VISIBLE);
+        rel_horizontal_bar.setVisibility(View.VISIBLE);
 
 
-        txt_interest_rate.setText(SharedPref.getInterestRate(LandingActivity.this));
-        txt_total_balance.setText(SharedPref.getTotalBalance(LandingActivity.this));
-        txt_total_monthly_pay.setText(SharedPref.getMonthlyPayment(LandingActivity.this));
+        txt_interest_rate.setText(SharedPref.getInterestRate(LandingActivity.this) + "%");
+        txt_total_balance.setText(getString(R.string.total_balance, SharedPref.getTotalBalance(LandingActivity.this)));
+        txt_total_monthly_pay.setText(getString(R.string.monthly_pay, SharedPref.getMonthlyPayment(LandingActivity.this)));
         txt_total_loan.setText("1");
+
+
+        txt_total_perc_loan.setText(getString(R.string.tot_perc_loan, "5000000"));
+
+
+        if (txt_balance != null && txt_total_balance != null) {
+
+            tot = 5000000 - Double.parseDouble(SharedPref.getTotalBalance(LandingActivity.this));
+
+            txt_paid_off.setText(getString(R.string.paid_off, Math.round(tot)));
+
+        }
+
+        if (txt_paid_off != null) {
+
+
+            double tot_perc = 5000000 / tot;
+            txt_perc_loan.setText(tot_perc + "%");
+            progressBar.setProgress((int) tot_perc);
+        }
+
+        txt_loan_desc.setText(Html.fromHtml(getString(R.string.desc_loan, SharedPref.getTotalBalance(LandingActivity.this),
+                SharedPref.getInterestRate(LandingActivity.this) + "%", SharedPref.getMonthlyPayment(LandingActivity.this)
+        )));
+
 
     }
 
@@ -218,7 +252,9 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
                 List<AccountBalance> accountBalance = response.body();
                 String accNo = accountBalance.get(1).getBalance();
                 txt_balance.setText(accNo);
-                progressBar.setVisibility(View.GONE);
+                tot_balance = Double.parseDouble(Utils.getString(txt_balance));
+                Log.e("totbal", String.valueOf(tot_balance));
+                progressBartwo.setVisibility(View.GONE);
             }
 
             @Override
@@ -267,7 +303,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
                 startActivityForResult(intent, Constants.LOAN_VERIFY);
                 break;
             case R.id.btnPayLoan:
-                getDialog();
+                showToast("Nothing yet");
            /*     loanAmount = Integer.parseInt(loan_amt);
                 tenure = Integer.parseInt(loan_tenure);
                 interestRate = Double.parseDouble(loan_ior);
@@ -338,7 +374,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-    public void getDialog() {
+    /*public void getDialog() {
         new BottomDialog.Builder(this)
                 .setTitle("LOAN ADVISORY FLOW ")
                 .setContent("You can either choose to follow our payment plans or create one of your own manually")
@@ -372,14 +408,14 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
             call.enqueue(new Callback<List<EmiModel>>() {
                 @Override
                 public void onResponse(Call<List<EmiModel>> call, Response<List<EmiModel>> response) {
-/*
+*//*
                 swipeRefreshLayout.post(new Runnable() {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });
-                */
+                *//*
                     List<EmiModel> emiModels=response.body();
                     String lastThree=emiModels.get(1).getLastThreeEMIs();
                     String totalEmis=emiModels.get(1).getNoOfEMIs();
@@ -405,13 +441,13 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
                 @Override
                 public void onFailure(Call<List<EmiModel>> call, Throwable t) {
-            /*    swipeRefreshLayout.post(new Runnable() {
+            *//*    swipeRefreshLayout.post(new Runnable() {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });
-                */  progressBar2.setVisibility(View.GONE);
+                *//*  progressBar2.setVisibility(View.GONE);
                     Toast.makeText(LandingActivity.this,t.toString(), Toast.LENGTH_SHORT).show();
                 }
 
@@ -419,6 +455,6 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
             });
 
 
-    }
+    }*/
 
 }

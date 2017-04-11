@@ -2,4 +2,9 @@
     <string name="app_name">EduLoanTracker</string>
     <string name="logout">Logout</string>
     <string name="profile">Profile</string>
+    <string name="total_balance">\u20B9 %1$s</string>
+    <string name="monthly_pay">\u20B9 %1$s</string>
+    <string name="paid_off">Paid off \u20B9 %1$d</string>
+    <string name="tot_perc_loan">\u20B9 %1$s</string>
+    <string name="desc_loan">For a loan with a balance of \u20B9%1$s at a %2$s average interest rate and a 15-year loan term , your total monthly payment would be \u20B9%3$s</string>
 </resources>
