@@ -71,6 +71,8 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     TextView txt_total_perc_loan;
     @BindView(R.id.txt_loan_desc)
     TextView txt_loan_desc;
+    @BindView(R.id.rel_loan_details)
+    RelativeLayout rel_loan_details;
    /* @BindView(R.id.txt_emi)
     TextView txt_last_three;
     @BindView(R.id.txt_last_three_emi)
@@ -125,8 +127,10 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
     private void setLoanDetails() {
 
-        rel_loan_dashboard.setVisibility(View.VISIBLE);
-        rel_horizontal_bar.setVisibility(View.VISIBLE);
+       /* rel_loan_dashboard.setVisibility(View.VISIBLE);
+        rel_horizontal_bar.setVisibility(View.VISIBLE);*/
+
+        rel_loan_details.setVisibility(View.VISIBLE);
 
 
         txt_interest_rate.setText(SharedPref.getInterestRate(LandingActivity.this) + "%");
@@ -303,16 +307,13 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
                 startActivityForResult(intent, Constants.LOAN_VERIFY);
                 break;
             case R.id.btnPayLoan:
-                showToast("Nothing yet");
-           /*     loanAmount = Integer.parseInt(loan_amt);
-                tenure = Integer.parseInt(loan_tenure);
-                interestRate = Double.parseDouble(loan_ior);
-
-                double monthly_pay = calculateMonthlyPayment(loanAmount, tenure, interestRate);
-                float monthly_pay_round = Math.round(monthly_pay);
-                Log.e("monthlypay", String.valueOf(monthly_pay_round));
-                */
+                Intent intent1 = new Intent(LandingActivity.this, AnalyseLoanActivity.class);
+                intent1.putExtra("loanBalance", SharedPref.getTotalBalance(LandingActivity.this));
+                intent1.putExtra("monthlyPay", SharedPref.getMonthlyPayment(LandingActivity.this));
+                intent1.putExtra("noPayment", "15");
+                startActivity(intent1);
                 break;
+
         }
     }
 

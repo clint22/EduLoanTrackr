@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_analyse_loan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context="com.example.appathon.eduloantracker.Views.AnalyseLoanActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/rel_analyse_loan"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/banner_background">
+
+
+        <TextView
+            android:id="@+id/desc_loan_analyse_bal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Loan Balance"
+            android:textColor="#FAFAFA"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt_loan_analyse_bal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/desc_loan_analyse_bal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Rs45000000"
+            android:textColor="#FAFAFA"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="180dp"
+        android:text="Reduce your Loan"
+        android:textAllCaps="false"
+        android:textColor="#FAFAFA"
+        android:background="@drawable/btnbackground"/>
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/rel_analyse_loan"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
+
+    <View
+        android:id="@+id/hor_line"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/chart"
+        android:layout_marginTop="15dp"
+        android:background="#BDBDBD" />
+
+    <RelativeLayout
+
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hor_line">
+
+        <TextView
+            android:id="@+id/desc_principle_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Principle Amount"
+            android:textAllCaps="true"
+            android:textColor="#757575"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_principle_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/desc_principle_amount"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="5dp"
+            android:text="Rs4500550"
+            android:textColor="#00E676"
+            android:textSize="18sp" />
+
+        <View
+            android:id="@+id/hor_linetwo"
+            android:layout_width="1dp"
+            android:layout_height="55dp"
+            android:layout_centerHorizontal="true"
+            android:background="#BDBDBD" />
+
+        <TextView
+            android:id="@+id/desc_interest_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Interest Amount"
+            android:textAllCaps="true"
+            android:textColor="#757575"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_loan_interest_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/desc_interest_amount"
+            android:layout_marginRight="42dp"
+            android:layout_marginTop="5dp"
+            android:text="Rs5657550"
+            android:textColor="#F44336"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/desc_total_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hor_linetwo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="TOTAL PAYMENT"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_total_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/desc_total_payment"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="Rs. 10,25,456.00"
+            android:textColor="#D500F9"
+            android:layout_marginBottom="25dp"
+            android:textSize="18sp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
+</ScrollView>
