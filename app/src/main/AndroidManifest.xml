@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Views.LoanDetailActivity" />
-        <activity android:name=".Views.AnalyseLoanActivity"></activity>
+        <activity android:name=".Views.AnalyseLoanActivity" />
+        <activity android:name=".Views.ReduceLoanTenureActivity"></activity>
     </application>
 
 </manifest>

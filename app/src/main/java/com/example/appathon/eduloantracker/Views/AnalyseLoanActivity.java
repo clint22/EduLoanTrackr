@@ -1,7 +1,11 @@
 package com.example.appathon.eduloantracker.Views;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.appathon.eduloantracker.R;
@@ -29,6 +33,8 @@ public class AnalyseLoanActivity extends BaseActivity {
     TextView txt_principle_amount;
     @BindView(txt_loan_analyse_bal)
     TextView txt_loan_balance;
+    @BindView(R.id.btnReduceLoan)
+    Button btnReduceLoan;
 
     private PieChart chart;
     private String loanBalance;
@@ -48,7 +54,37 @@ public class AnalyseLoanActivity extends BaseActivity {
 
         setValues();
 
+        btnReduceLoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                showReduceLoanDialog();
+            }
+        });
+
+
+    }
+
+    private void showReduceLoanDialog() {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.custom_reduce_loan_dialog);
+        dialog.setTitle("Reduce Your Loan");
+
+
+        Button btnTwo = ButterKnife.findById(dialog, R.id.btntwo);
+        btnTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AnalyseLoanActivity.this, ReduceLoanTenureActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
+        dialog.show();
 
 
     }
@@ -77,7 +113,7 @@ public class AnalyseLoanActivity extends BaseActivity {
 
     private void calcFormula(Double numberOfPayment, Double monthlyPay) {
 
-        Double monthPay = ( numberOfPayment * 12);
+        Double monthPay = (numberOfPayment * 12);
 
         Log.e("accbal", String.valueOf(monthPay));
 
@@ -95,11 +131,6 @@ public class AnalyseLoanActivity extends BaseActivity {
 
             setChart(InterestAmount, PrincipleAmount);
         }
-
-
-
-
-
 
 
     }

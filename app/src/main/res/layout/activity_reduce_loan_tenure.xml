@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_reduce_loan_tenure"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context="com.example.appathon.eduloantracker.Views.ReduceLoanTenureActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ripple_background_white"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/desc_loan_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Rs.4,55,666"
+                android:textColor="#212121"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/txt_loan_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/desc_loan_balance"
+                android:layout_marginLeft="10dp"
+                android:text="Current Loan Balance"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/hor_layout"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/txt_loan_balance"
+                android:layout_marginTop="8dp"
+                android:background="#c0c0c0" />
+
+            <TextView
+                android:id="@+id/desc_current_princ_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hor_layout"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Current Principle Amount"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txt_current_desc_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hor_layout"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@+id/desc_current_princ_amount"
+                android:text="Rs. 2,55,654"
+                android:textColor="#212121"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/desc_current_interest_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/desc_current_princ_amount"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Current Interest Amount"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txt_current_interest_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/desc_current_princ_amount"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@+id/desc_current_interest_amount"
+                android:text="Rs. 2,55,754"
+                android:textColor="#212121"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/desc_current_total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/desc_current_interest_amount"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Current Total Payment"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txt_current_total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/desc_current_interest_amount"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@+id/desc_current_total_amount"
+                android:text="Rs. 2,55,754"
+                android:textColor="#212121"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/desc_enter_new_tenure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/desc_current_total_amount"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Enter new tenure"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/edttxt_new_tenure"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/txt_current_total_amount"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:layout_toRightOf="@+id/desc_enter_new_tenure"
+                android:background="#EEEEEE" />
+
+            <ImageView
+                android:id="@+id/btnGo"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_below="@+id/desc_current_total_amount"
+                android:layout_toRightOf="@+id/edttxt_new_tenure"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/rightarrow"
+                />
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

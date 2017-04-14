@@ -51,6 +51,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/btnReduceLoan"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
