@@ -119,7 +119,6 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
 
         loadJSON();
-        loadAccount();
         setClicks();
 
 
@@ -139,12 +138,12 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         txt_total_loan.setText("1");
 
 
-        txt_total_perc_loan.setText(getString(R.string.tot_perc_loan, "5000000"));
+        txt_total_perc_loan.setText(getString(R.string.tot_perc_loan, "500000"));
 
 
         if (txt_balance != null && txt_total_balance != null) {
 
-            tot = 5000000 - Double.parseDouble(SharedPref.getTotalBalance(LandingActivity.this));
+            tot = 500000 - Double.parseDouble(SharedPref.getTotalBalance(LandingActivity.this));
 
             txt_paid_off.setText(getString(R.string.paid_off, Math.round(tot)));
 
@@ -153,9 +152,10 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         if (txt_paid_off != null) {
 
 
-            double tot_perc = 5000000 / tot;
-            txt_perc_loan.setText(tot_perc + "%");
-            progressBar.setProgress((int) tot_perc);
+            double tot_perc = tot / 500000;
+            double tot_perc_two = tot_perc * 100;
+            txt_perc_loan.setText(Math.round(tot_perc_two) + "%");
+            progressBar.setProgress((int) Math.round(tot_perc_two));
         }
 
         txt_loan_desc.setText(Html.fromHtml(getString(R.string.desc_loan, SharedPref.getTotalBalance(LandingActivity.this),
@@ -186,6 +186,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
                 List<AuthModel> authModel = response.body();
                 String token = authModel.get(0).getToken();
                 PreferencesHelper.getInstance(LandingActivity.this).storeUnencryptedSetting(Constants.TOKEN_PREF_KEY, token);
+                loadAccount();
             }
 
             @Override
@@ -310,7 +311,8 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
                 Intent intent1 = new Intent(LandingActivity.this, AnalyseLoanActivity.class);
                 intent1.putExtra("loanBalance", SharedPref.getTotalBalance(LandingActivity.this));
                 intent1.putExtra("monthlyPay", SharedPref.getMonthlyPayment(LandingActivity.this));
-                intent1.putExtra("noPayment", "15");
+                intent1.putExtra("noPayment", SharedPref.getLoanTenure(LandingActivity.this));
+                intent1.putExtra("interestrate", SharedPref.getInterestRate(LandingActivity.this));
                 startActivity(intent1);
                 break;
 
@@ -332,7 +334,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
                         showToast("Contains Key");
                         rel_sync_loans.setVisibility(View.GONE);
-                        rel_loan_dashboard.setVisibility(View.VISIBLE);
+                        rel_loan_details.setVisibility(View.VISIBLE);
                         SharedPref.setLoanAddedOrNot(LandingActivity.this, true);
 
                         loan_amt = data.getExtras().getString("out_amount");
@@ -340,6 +342,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
                         loan_ior = data.getExtras().getString("interest");
                         loan_ior = loan_ior.replace("%", "");
                         calcLoan();
+                        calcLoanPercent();
 
                         Log.e("loandets", Utils.getString(loan_amt));
 
@@ -349,6 +352,29 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void calcLoanPercent() {
+
+        txt_total_perc_loan.setText(getString(R.string.tot_perc_loan, "500000"));
+
+
+        if (txt_balance != null && txt_total_balance != null) {
+
+            tot = 500000 - Double.parseDouble(SharedPref.getTotalBalance(LandingActivity.this));
+
+            txt_paid_off.setText(getString(R.string.paid_off, Math.round(tot)));
+
+        }
+
+        if (txt_paid_off != null) {
+
+
+            double tot_perc = tot / 500000;
+            double tot_perc_two = tot_perc * 100;
+            txt_perc_loan.setText(Math.round(tot_perc_two) + "%");
+            progressBar.setProgress((int) Math.round(tot_perc_two));
         }
     }
 
@@ -369,6 +395,9 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
         SharedPref.setMonthlyPayment(LandingActivity.this, String.valueOf(monthly_pay_round));
         txt_total_monthly_pay.setText(String.valueOf(monthly_pay_round));
+
+        SharedPref.setLoanTenure(LandingActivity.this, loan_tenure);
+
 
         txt_total_loan.setText("1");
 

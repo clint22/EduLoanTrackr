@@ -13,6 +13,7 @@
         layout="@layout/toolbar" />
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardviewone"
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_below="@+id/toolbar"
@@ -155,5 +156,124 @@
 
 
     </android.support.v7.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/rel_one"
+        android:layout_below="@+id/cardviewone"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardviewtwo"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ripple_background_white"
+            card_view:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <TextView
+                    android:id="@+id/desc_new_princ_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="New Principle Amount"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/txt_new_desc_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_toRightOf="@+id/desc_new_princ_amount"
+                    android:text="Rs. 2,55,654"
+                    android:textColor="#212121"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/desc_new_interest_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/desc_new_princ_amount"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="New Interest Amount"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/txt_new_interest_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/desc_new_princ_amount"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@+id/desc_new_interest_amount"
+                    android:text="Rs. 2,55,754"
+                    android:textColor="#212121"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/desc_new_total_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/desc_new_interest_amount"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Current Total Payment"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/txt_new_total_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/desc_new_interest_amount"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@+id/desc_new_total_amount"
+                    android:text="Rs. 2,55,754"
+                    android:textColor="#212121"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:id="@+id/desc_new_you_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_new_total_amount"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="25dp"
+                    android:textSize="22sp"
+                    android:text="You Save"/>
+
+
+                <TextView
+                    android:id="@+id/txt_save_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_new_total_amount"
+                    android:layout_marginTop="25dp"
+                    android:layout_toRightOf="@+id/desc_new_you_save"
+                    android:layout_marginLeft="25dp"
+                    android:textSize="22sp"
+                    android:text="Rs.150000"/>
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
 
 </RelativeLayout>

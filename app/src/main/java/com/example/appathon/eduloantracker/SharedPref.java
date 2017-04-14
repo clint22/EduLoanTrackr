@@ -15,6 +15,7 @@ public class SharedPref {
     private static String S_PREFS_TOTAL_BALANCE = "total_balance";
     private static String S_PREFS_MONTHLY_PAY = "monthly_payment";
     private static String S_PREFS_TOTAL_LOAN = "loan_years";
+    private static String S_PREFS_LOAN_TENURE = "tenure";
     private static String S_PREFS_LOAN_ADDED = "loan_added";
 
     public static SharedPreferences getAppSharedPref(Context context) {
@@ -78,6 +79,18 @@ public class SharedPref {
     public static String getLoanTotal(Context context) {
         prefs = getAppSharedPref(context);
         return prefs.getString(S_PREFS_TOTAL_LOAN, "");
+    }
+
+    public static void setLoanTenure(Context context, String tenure) {
+
+        prefs = getAppSharedPref(context);
+        prefs.edit().putString(S_PREFS_LOAN_TENURE, tenure).apply();
+    }
+
+    public static String getLoanTenure(Context context) {
+
+        prefs = getAppSharedPref(context);
+        return prefs.getString(S_PREFS_LOAN_TENURE,"");
     }
 
 

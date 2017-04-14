@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.appathon.eduloantracker.R;
+import com.example.appathon.eduloantracker.Utils;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -39,7 +40,7 @@ public class AnalyseLoanActivity extends BaseActivity {
     private PieChart chart;
     private String loanBalance;
     private String MonthlyPayment;
-    private String noOfPayment;
+    private String noOfPayment, interest_rate;
     private Double loanBal, MonthlyPay, AccruedAmount, PrincipleAmount, InterestAmount, TotalPayment, numberOfPayment;
 
 
@@ -78,6 +79,13 @@ public class AnalyseLoanActivity extends BaseActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(AnalyseLoanActivity.this, ReduceLoanTenureActivity.class);
+                intent.putExtra("loan_balance", loanBalance);
+                intent.putExtra("principle_amount", PrincipleAmount);
+                intent.putExtra("interest_amount", InterestAmount);
+                intent.putExtra("total_payment", AccruedAmount);
+                intent.putExtra("monthly_pay", MonthlyPay);
+                intent.putExtra("noOfPay", numberOfPayment);
+                intent.putExtra("interestrate", interest_rate);
                 startActivity(intent);
                 finish();
             }
@@ -94,6 +102,8 @@ public class AnalyseLoanActivity extends BaseActivity {
         loanBalance = getIntent().getExtras().getString("loanBalance");
         MonthlyPayment = getIntent().getExtras().getString("monthlyPay");
         noOfPayment = getIntent().getExtras().getString("noPayment");
+        interest_rate = getIntent().getExtras().getString("interestrate");
+        Log.e("int_rate", Utils.getString(interest_rate));
 
         if (loanBalance != null) {
 
