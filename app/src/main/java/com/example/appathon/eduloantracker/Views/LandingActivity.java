@@ -2,7 +2,6 @@ package com.example.appathon.eduloantracker.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
@@ -25,7 +24,6 @@ import com.example.appathon.eduloantracker.model.AccountBalance;
 import com.example.appathon.eduloantracker.model.AccountsModel;
 import com.example.appathon.eduloantracker.model.AuthModel;
 import com.example.appathon.eduloantracker.service.BankInterface;
-import com.github.mikephil.charting.charts.LineChart;
 
 import java.util.List;
 
@@ -73,26 +71,13 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     TextView txt_loan_desc;
     @BindView(R.id.rel_loan_details)
     RelativeLayout rel_loan_details;
-   /* @BindView(R.id.txt_emi)
-    TextView txt_last_three;
-    @BindView(R.id.txt_last_three_emi)
-    TextView txt_last_three_emi;
-    @BindView(R.id.txt_emi_nos)
-    TextView txt_emi_nos;
-    @BindView(R.id.txt_total_emi)
-    TextView txt_total_emi;
-    @BindView(R.id.progressbar_analysis)
-    ProgressBar progressBar2;*/
 
     private int loanAmount, tenure;
     private double interestRate;
     private double tot_balance, tot;
-    private Boolean loanAddedOrNot = true;
     UserSessionManager session;
-    private String loan_amt, loan_tenure, loan_ior, loanNo, loanAg, loanOut, token;
-    private LineChart chart;
-    private int progressStatus = 0;
-    private Handler handler = new Handler();
+    private String loan_amt, loan_tenure, loan_ior;
+    private double loan_total_amount = 5000000;
 
 
     @Override
@@ -138,12 +123,12 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         txt_total_loan.setText("1");
 
 
-        txt_total_perc_loan.setText(getString(R.string.tot_perc_loan, "500000"));
+        txt_total_perc_loan.setText(getString(R.string.accrued_amount, Math.round(loan_total_amount)));
 
 
         if (txt_balance != null && txt_total_balance != null) {
 
-            tot = 500000 - Double.parseDouble(SharedPref.getTotalBalance(LandingActivity.this));
+            tot = loan_total_amount - Double.parseDouble(SharedPref.getTotalBalance(LandingActivity.this));
 
             txt_paid_off.setText(getString(R.string.paid_off, Math.round(tot)));
 
@@ -152,7 +137,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         if (txt_paid_off != null) {
 
 
-            double tot_perc = tot / 500000;
+            double tot_perc = tot / loan_total_amount;
             double tot_perc_two = tot_perc * 100;
             txt_perc_loan.setText(Math.round(tot_perc_two) + "%");
             progressBar.setProgress((int) Math.round(tot_perc_two));
@@ -356,12 +341,12 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
     private void calcLoanPercent() {
 
-        txt_total_perc_loan.setText(getString(R.string.tot_perc_loan, "500000"));
+        txt_total_perc_loan.setText(getString(R.string.accrued_amount, Math.round(loan_total_amount)));
 
 
         if (txt_balance != null && txt_total_balance != null) {
 
-            tot = 500000 - Double.parseDouble(SharedPref.getTotalBalance(LandingActivity.this));
+            tot = loan_total_amount - Double.parseDouble(SharedPref.getTotalBalance(LandingActivity.this));
 
             txt_paid_off.setText(getString(R.string.paid_off, Math.round(tot)));
 
@@ -370,7 +355,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         if (txt_paid_off != null) {
 
 
-            double tot_perc = tot / 500000;
+            double tot_perc = tot / loan_total_amount;
             double tot_perc_two = tot_perc * 100;
             txt_perc_loan.setText(Math.round(tot_perc_two) + "%");
             progressBar.setProgress((int) Math.round(tot_perc_two));
@@ -390,10 +375,10 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         txt_interest_rate.setText(loan_ior + "%");
 
         SharedPref.setTotalBalance(LandingActivity.this, loan_amt);
-        txt_total_balance.setText(getString(R.string.total_balance,loan_amt));
+        txt_total_balance.setText(getString(R.string.total_balance, loan_amt));
 
         SharedPref.setMonthlyPayment(LandingActivity.this, String.valueOf(monthly_pay_round));
-        txt_total_monthly_pay.setText( getString(R.string.monthly_pay,String.valueOf(monthly_pay_round)));
+        txt_total_monthly_pay.setText(getString(R.string.monthly_pay, String.valueOf(monthly_pay_round)));
 
         SharedPref.setLoanTenure(LandingActivity.this, loan_tenure);
 
