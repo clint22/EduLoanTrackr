@@ -332,7 +332,6 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
                     if (Utils.isNotEmpty(data.getExtras().getString("out_amount")) && Utils.isNotEmpty(data.getExtras().getString("interest"))
                             && Utils.isNotEmpty(data.getExtras().getString("tenure"))) {
 
-                        showToast("Contains Key");
                         rel_sync_loans.setVisibility(View.GONE);
                         rel_loan_details.setVisibility(View.VISIBLE);
                         SharedPref.setLoanAddedOrNot(LandingActivity.this, true);
@@ -388,18 +387,24 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         Log.e("monthlypay", String.valueOf(monthly_pay_round));
 
         SharedPref.setInterestRate(LandingActivity.this, loan_ior);
-        txt_interest_rate.setText(loan_ior);
+        txt_interest_rate.setText(loan_ior + "%");
 
         SharedPref.setTotalBalance(LandingActivity.this, loan_amt);
-        txt_total_balance.setText(loan_amt);
+        txt_total_balance.setText(getString(R.string.total_balance,loan_amt));
 
         SharedPref.setMonthlyPayment(LandingActivity.this, String.valueOf(monthly_pay_round));
-        txt_total_monthly_pay.setText(String.valueOf(monthly_pay_round));
+        txt_total_monthly_pay.setText( getString(R.string.monthly_pay,String.valueOf(monthly_pay_round)));
 
         SharedPref.setLoanTenure(LandingActivity.this, loan_tenure);
 
 
         txt_total_loan.setText("1");
+
+
+        /*txt_interest_rate.setText(SharedPref.getInterestRate(LandingActivity.this) + "%");
+        txt_total_balance.setText(getString(R.string.total_balance, SharedPref.getTotalBalance(LandingActivity.this)));
+        txt_total_monthly_pay.setText(getString(R.string.monthly_pay, SharedPref.getMonthlyPayment(LandingActivity.this)));
+        txt_total_loan.setText("1");*/
 
 
     }

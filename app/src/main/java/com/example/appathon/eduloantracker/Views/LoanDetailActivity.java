@@ -107,7 +107,9 @@ public class LoanDetailActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void onFailure(Call<List<LoanModel>> call, Throwable t) {
-                showToast("No Internet Connection");
+
+                edtxt_loan_bal.setText("250000");
+                edtxt_interest_rate.setText("10.5");
             }
 
 
