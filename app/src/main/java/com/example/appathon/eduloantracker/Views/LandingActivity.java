@@ -396,6 +396,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
         txt_total_monthly_pay.setText( getString(R.string.monthly_pay,String.valueOf(monthly_pay_round)));
 
         SharedPref.setLoanTenure(LandingActivity.this, loan_tenure);
+        PreferencesHelper.getInstance(LandingActivity.this).storeUnencryptedSetting("tenure", loan_tenure);
 
 
         txt_total_loan.setText("1");

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.appathon.eduloantracker.PreferencesHelper;
 import com.example.appathon.eduloantracker.R;
 import com.example.appathon.eduloantracker.Utils;
 import com.github.mikephil.charting.charts.PieChart;
@@ -40,7 +41,7 @@ public class AnalyseLoanActivity extends BaseActivity {
     private PieChart chart;
     private String loanBalance;
     private String MonthlyPayment;
-    private String noOfPayment, interest_rate;
+    private String noOfPayment="5", interest_rate;
     private Double loanBal, MonthlyPay, AccruedAmount, PrincipleAmount, InterestAmount, TotalPayment, numberOfPayment;
 
 
@@ -101,7 +102,7 @@ public class AnalyseLoanActivity extends BaseActivity {
 
         loanBalance = getIntent().getExtras().getString("loanBalance");
         MonthlyPayment = getIntent().getExtras().getString("monthlyPay");
-        noOfPayment = getIntent().getExtras().getString("noPayment");
+        noOfPayment = PreferencesHelper.getInstance(AnalyseLoanActivity.this).getUnencryptedSetting("tenure");
         interest_rate = getIntent().getExtras().getString("interestrate");
         Log.e("int_rate", Utils.getString(interest_rate));
 
